@@ -1,0 +1,13 @@
+type Token {
+    access_token: String!
+    refresh_token: String!
+}
+
+type Query {
+    loginUser(email: String!, password: String!):Token
+    isTokenExpired(accessToken: String!): Boolean
+#    refreshToken(accessToken: String!, refreshToken: String!):Token
+}
+type Mutation {
+    registerUser(username: String!, email: String!, password: String!):Token
+}
