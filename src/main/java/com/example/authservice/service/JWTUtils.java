@@ -30,6 +30,11 @@ public class JWTUtils {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 
+//    public String getClaim(String token, String content) {
+//        Claims claim = getClaims(token);
+//        return claim.get(content).toString();
+//    }
+
     public Date getExpirationDate(String token) {
         return getClaims(token).getExpiration();
     }

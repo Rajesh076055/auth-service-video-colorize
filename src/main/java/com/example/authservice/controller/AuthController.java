@@ -3,12 +3,15 @@ package com.example.authservice.controller;
 import com.example.authservice.entity.LoginRequest;
 import com.example.authservice.entity.RegisterRequest;
 import com.example.authservice.entity.Token;
+import com.example.authservice.entity.User;
 import com.example.authservice.service.AuthService;
+import io.jsonwebtoken.Claims;
 import lombok.AllArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
@@ -41,7 +44,7 @@ public class AuthController {
     }
 
     @QueryMapping
-    public Boolean isTokenExpired(@Argument String accessToken) {
-        return this.authService.isTokenExpired(accessToken);
+    public Claims getUserDetails(@Argument String accessToken) {
+        return this.authService.getUserDetails(accessToken);
     }
 }

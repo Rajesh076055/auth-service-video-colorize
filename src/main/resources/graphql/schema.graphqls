@@ -3,10 +3,14 @@ type Token {
     refresh_token: String!
 }
 
+type Claims {
+    username: String!
+    email: String!
+}
 type Query {
     loginUser(email: String!, password: String!):Token
     isTokenExpired(accessToken: String!): Boolean
-#    refreshToken(accessToken: String!, refreshToken: String!):Token
+    getUserDetails(accessToken: String!): Claims
 }
 type Mutation {
     registerUser(username: String!, email: String!, password: String!):Token

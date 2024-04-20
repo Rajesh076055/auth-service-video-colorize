@@ -5,6 +5,7 @@ import com.example.authservice.entity.RegisterRequest;
 import com.example.authservice.entity.Token;
 import com.example.authservice.entity.User;
 import com.example.authservice.repository.UserRepository;
+import io.jsonwebtoken.Claims;
 import lombok.AllArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 public class AuthService {
 
     private final UserRepository userRepository;
-//    private final RestTemplate restTemplate;
     private final JWTUtils jwtUtils;
 
     public Token registerUser(RegisterRequest registerRequest) {
@@ -45,27 +45,7 @@ public class AuthService {
         return null;
     }
 
-    public Boolean isTokenExpired(String accessToken) {
-        return jwtUtils.isExpired(accessToken);
+    public Claims getUserDetails(String token) {
+        return jwtUtils.getClaims(token);
     }
-
-//    public Token refreshToken(Token token) {
-//            String refreshToken = token.getAccess_token();
-//
-//            // Verify the validity of the refresh token (e.g., check if it's not expired)
-//            if (!jwtUtils.isExpired(refreshToken)) {
-//                // Assuming the refresh token is valid, generate new access and refresh tokens
-//                // Here, I'll just demonstrate generating new tokens without validation
-//
-//                // Generate new tokens
-//                String newAccessToken = jwtUtils.generate("username", "email", "ACCESS");
-//                String newRefreshToken = jwtUtils.generate("username", "email", "REFRESH");
-//
-//                // Return the new tokens encapsulated in a Token object
-//                return new Token(newAccessToken, newRefreshToken);
-//            }
-//
-//            // If the refresh token is expired or invalid, return null or handle it as needed
-//            return null;
-//        }
 }
